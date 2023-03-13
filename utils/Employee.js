@@ -1,11 +1,12 @@
 class Employee {
-    constructor(firstname, lastname, ) {
-      this.name = name;
-      this.age = age;
-      this.gender = gender;
+    constructor(firstname, lastname, roleid, managerid=null) {
+      this.firstname = firstname;
+      this.lastname = lastname;
+      this.roleid = roleid;
+      this.managerid = managerid
     }
   
-    greet() {
-      console.log(`Hi, my name is ${this.name}`);
+    getEmployeeName() {
+      console.log(`Hi, my name is ${this.firstname} ${this.lastname}`);
     }
   }
