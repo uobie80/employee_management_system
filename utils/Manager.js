@@ -6,3 +6,5 @@ class Manager {
 
       getManagers(){}
 }
+
+module.exports = Manager;

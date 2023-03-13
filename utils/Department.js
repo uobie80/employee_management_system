@@ -5,3 +5,9 @@ class Department {
 
       getDepartments(){}
 }
+
+
+
+
+
+module.exports = Department;

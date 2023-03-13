@@ -6,3 +6,5 @@ class Role {
 
       getRoles(){}
 }
+
+module.exports = Role;
