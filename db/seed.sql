@@ -1,6 +1,5 @@
 USE employee_ms_db;
 
-/*Seed department table*/
 INSERT INTO department (name) 
      VALUES ("Finance"),
             ("Accounting"),
@@ -9,7 +8,7 @@ INSERT INTO department (name)
             ("Information Technology");
      
 
-/*Seed role table*/
+
 INSERT INTO role (title, salary, department_id) 
           VALUES ("Finance Analyst", 70000.00, 1),
                  ("Finance Manager", 90000.00, 1),
@@ -23,12 +22,11 @@ INSERT INTO role (title, salary, department_id)
                  ("HR Consultant", 76000.00, 3),
                  ("Customer Service Manager", 85000.00, 4),
                  ("Call Center Manager", 80000.00, 4),
-                 ("Helpdesk Technician", 60000.00, 4);
+                 ("Helpdesk Technician", 60000.00, 4),
                  ("Full Stack Developer", 85000.00, 5),
                  ("Senior Java Developer", 110000.00, 5),
                  ("IT Manager", 120000.00, 5);
-
-/*Seed employee table*/
+                 
 INSERT INTO employee (firstname, lastname, role_id, manager_id) 
      VALUES ("Peter","Parker", 16, null),
             ("Bruce", "Banner", 15, 1),
@@ -38,5 +36,5 @@ INSERT INTO employee (firstname, lastname, role_id, manager_id)
             ("Jane","Doe", 8, 5),
             ("Kevin", "Johnson", 11, null),
             ("Charles","Barkley",13,7),
-            ("Kevin","Durant",14,10),
-            ("Michael", "Jordan",16,null);
+            ("Michael", "Jordan",16,null),
+            ("Kevin","Durant",14,10);
