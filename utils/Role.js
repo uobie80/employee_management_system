@@ -5,10 +5,14 @@ class Role {
       }
 
 
-      getAllRoles(){
+      getAllRoles( showMenu){
         this.pool.query( "SELECT * FROM role",  function(err, results, fields) {
-            console.table(results); // results contains rows returned by server
-            console.log(fields); // fields contains extra meta data about results, if available
+          if(err){
+            console.error(err);
+            return;
+          }
+          console.table(results);  
+          showMenu();
           }
         );
       }

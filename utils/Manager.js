@@ -5,11 +5,16 @@ class Manager {
       }
 
 
-      getAllManagers(){ 
+      getAllManagers(showMenu){ 
         this.pool.query( "SELECT * FROM employee WHERE employee.manager_id = employee.id AND manager_id IS NOT NULL",  
          function(err, results, fields) {
-        console.table(results); // results contains rows returned by server
-        console.log(fields); // fields contains extra meta data about results, if available
+          if(err){
+            console.error(err);
+            return;
+          }
+          console.table(results);  
+          showMenu();
+        
       }
     );
   }

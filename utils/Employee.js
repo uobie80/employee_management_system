@@ -6,9 +6,14 @@ class Employee {
     }
   
 
-    getAllEmployees(){ this.pool.query( "SELECT * FROM employee",  function(err, results, fields) {
-      console.table(results); // results contains rows returned by server
-      console.log(fields); // fields contains extra meta data about results, if available
+    getAllEmployees(showMenu){ this.pool.query( "SELECT * FROM employee",  function(err, results, fields) {
+      if(err){
+        console.error(err);
+        return;
+      }
+      console.table(results);  
+      showMenu();
+     
     }
   );
 }
