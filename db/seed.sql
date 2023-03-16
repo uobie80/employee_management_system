@@ -37,4 +37,4 @@ INSERT INTO employee (firstname, lastname, role_id, manager_id)
             ("Kevin", "Johnson", 11, null),
             ("Charles","Barkley",13,7),
             ("Michael", "Jordan",16,null),
-            ("Kevin","Durant",14,10);
+            ("Kevin","Durant",14,9);
