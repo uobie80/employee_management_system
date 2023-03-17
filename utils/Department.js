@@ -6,6 +6,7 @@ class Department {
         this.departments = [];
       }
 
+      //Get all departments from the department table
       getAllDepartments(showMenu){ this.pool.query( "SELECT * FROM department",  function(err, results, fields) {
 
         if(err){
@@ -18,7 +19,7 @@ class Department {
          showMenu(); 
         }); 
       }
-
+       //Add a new department to the department table
       addDepartment(value, showMenu){ this.pool.execute( "INSERT INTO department(name) VALUES (?)", value, function(err, results, fields) {
        
        if(err){
@@ -31,7 +32,7 @@ class Department {
         
         }
 
-
+        //Get a list of all the departments
         getLisOfDepartments() {
 
           return new Promise((resolve, reject) => {
@@ -53,7 +54,7 @@ class Department {
 
 
         }
-
+    //Delete a department from the department table
     deleteDepartment(value, showMenu){
       this.pool.query( `DELETE FROM department WHERE id = ?`, value,  function(err, results, fields) {
 
@@ -68,7 +69,7 @@ class Department {
     
     }
 
-
+   //Get total budget per department
     getTotalBudget(showMenu){
       this.pool.execute(` SELECT employee_ms_db.department.id, 
                                  employee_ms_db.department.name as department,

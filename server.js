@@ -27,7 +27,7 @@ const pool = mysql.createPool({
  const role = new Role(pool);
  const mgr = new Manager(pool);
 
-// define functions
+// define functions for each specific prompt
 const showDepartments = function(){
 
   dept.getAllDepartments(showMenu);
@@ -47,7 +47,7 @@ const showRoles = function(){
 const showEmployees = function(){
 
   emp.getAllEmployees(showMenu);
-  //mgr.getAllManagers(showMenu);
+
 
 
 };
@@ -349,7 +349,7 @@ const showTotalDeptBudget = function(showMenu){
 
 
 
-//Define Menu Prompt
+//Define main menu prompt
 const showMenu = function(){
 
     inquirer
@@ -387,7 +387,7 @@ const showMenu = function(){
                 });
                 
               } else if (response.menu === "add an employee") {
-              //  addEmployee();
+       
                     emp.getLisOfRoles()
                         .then((roles) => {
                     emp.getLisOfEmployees()

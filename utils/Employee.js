@@ -5,7 +5,7 @@ class Employee {
       this.pool = pool;
     }
   
-
+     //Show all employees
     getAllEmployees(showMenu){ this.pool.query( `SELECT nonmanager.id, 
                                                         nonmanager.firstname,
                                                         nonmanager.lastname,
@@ -26,7 +26,7 @@ class Employee {
     });
 } 
 
-
+ //Get all employee roles
 getLisOfRoles() {
 
   return new Promise((resolve, reject) => {
@@ -52,7 +52,7 @@ getLisOfRoles() {
 }
 
 
-
+ //Get list all employees
 getLisOfEmployees() {
 
   return new Promise((resolve, reject) => {
@@ -75,7 +75,7 @@ getLisOfEmployees() {
    
 }
 
-
+  //Add employee
   addEmployee(values, showMenu){
    
     for (let i=0; i<values.length; i++){
@@ -100,7 +100,7 @@ getLisOfEmployees() {
   }
 
 
-
+  //Update employee role
   updateEmployeeRole(values, showMenu){
 
     this.pool.execute(`UPDATE employee SET role_id = ? WHERE id = ?`,values, function(err, results, fields){
@@ -118,7 +118,7 @@ getLisOfEmployees() {
 
   }
 
-
+  //Update employee manager
   updateEmployeeManager(values, showMenu){
 
     for (let i=0; i<values.length; i++){
@@ -140,7 +140,7 @@ getLisOfEmployees() {
 
   }
 
-
+   //show employee by department
   showEmployeesByDepartment(showMenu){
 
     this.pool.execute(`SELECT department.name as department, employee.firstname, employee.lastname 
@@ -161,7 +161,7 @@ getLisOfEmployees() {
     });
   }
 
-
+  //Delete an employee
   deleteEmployee(value, showMenu){
     this.pool.query( `DELETE FROM employee WHERE id = ?`, value,  function(err, results, fields) {
 

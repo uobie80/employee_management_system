@@ -3,6 +3,7 @@ CREATE DATABASE employee_ms_db;
 
 USE employee_ms_db;
 
+
 CREATE TABLE department (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(30) NOT NULL

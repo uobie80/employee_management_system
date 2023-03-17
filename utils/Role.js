@@ -4,7 +4,7 @@ class Role {
         this.pool = pool;
       }
 
-
+    //show all roles
       getAllRoles( showMenu){
         this.pool.query( "SELECT * FROM role",  function(err, results, fields) {
           if(err){
@@ -18,7 +18,7 @@ class Role {
           }
         );
       }
-
+      //Add new role
       addRole(values, showMenu){
         this.pool.execute(`INSERT INTO role(title, salary, department_id) VALUES (?,?,?)`, values, function(err, results, fields){
 
@@ -33,7 +33,7 @@ class Role {
       }
 
 
-
+   //Get list of all roles
     getListOfRoles() {
 
         return new Promise((resolve, reject) => {
@@ -56,7 +56,7 @@ class Role {
     }
 
 
-
+     //Delete a role
     deleteRole(value, showMenu){
       this.pool.query( `DELETE FROM role WHERE id = ?`, value,  function(err, results, fields) {
 

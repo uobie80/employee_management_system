@@ -4,7 +4,7 @@ class Manager {
         this.pool = pool;
       }
 
-
+     //Get all managers
       getAllManagers(showMenu){ 
         this.pool.query( `SELECT CONCAT(manager.firstname + ' ' + manager.lastname) as manager 
                                  CONCAT(employee.firstname + ' ' + employee.lastname) as non_manager_employee,
@@ -25,7 +25,7 @@ class Manager {
       }
     );}
 
-
+    // show employee manager
     showEmployeesByManager(showMenu){
       this.pool.execute(`SELECT CONCAT(employee.firstname, ' ', employee.lastname) as manager, 
                         CONCAT(nonmanager.firstname ,' ', nonmanager.lastname) as non_manager_employee
