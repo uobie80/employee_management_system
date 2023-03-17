@@ -29,3 +29,5 @@ WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database  
 
 ## Walkthrough Video
+The following link is a walkthrough video that demonstrates the functionality of the employee management system:  
+ - [Employee Management System](https://watch.screencastify.com/v/s0FwRTJUszT3pPIiyV4v)
