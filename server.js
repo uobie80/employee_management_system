@@ -250,28 +250,100 @@ const showEmployeeManager = function(showMenu){
 
 }
 
-const showEmployeeByDepartment = function(){
+const showEmployeeByDepartment = function(showMenu){
+ emp.showEmployeesByDepartment(showMenu);
+}
+
+
+const deleteDepartment = function(departments, showMenu){
+
+  var depts = [];
+
+for (let key of departments.keys()) {
+  depts.push(key);
+}
+
+
+
+inquirer
+.prompt([ 
+        {
+          type: 'list',
+          message: "Please select the department to delete.",
+          name: 'department',
+          choices: depts
+         },
+      ])
+.then((response) => { 
+
+       const department_id = departments.get(response.department);
+       
+       dept.deleteDepartment([department_id], showMenu);
+});
+
+
 
 }
 
 
-const deleteDepartment = function(){
+
+const deleteRole = function(roles, showMenu){
+
+  var rolesList = [];
+
+  for (let key of roles.keys()) {
+    rolesList.push(key);
+  }
+  
+  inquirer
+  .prompt([ 
+          {
+            type: 'list',
+            message: "Please select the role to delete.",
+            name: 'role',
+            choices: rolesList
+           },
+        ])
+  .then((response) => { 
+  
+         const role_id = roles.get(response.role);
+         
+         role.deleteRole([role_id], showMenu);
+  });
+  
 
 }
 
 
+const deleteEmployee = function(employees, showMenu){
+  var empList = [];
 
-const deleteRole = function(){
-
+  for (let key of employees.keys()) {
+    empList.push(key);
+  }
+  
+  inquirer
+  .prompt([ 
+          {
+            type: 'list',
+            message: "Please select the employee to delete.",
+            name: 'employee',
+            choices: empList
+           },
+        ])
+  .then((response) => { 
+  
+         const employee_id = employees.get(response.employee);
+         
+         emp.deleteEmployee([employee_id], showMenu);
+  });
+  
 }
 
 
-const deleteEmployee = function(){
+const showTotalDeptBudget = function(showMenu){
 
-}
-
-
-const showTotalDeptBudget = function(){
+  dept.getTotalBudget(showMenu);
 
 } 
 
@@ -288,8 +360,8 @@ const showMenu = function(){
              name: 'menu',
              choices: ['view all departments', 'view all roles', 'view all employees', 'add a department',
                        'add a role', 'add an employee','update an employee role', 'update employee managers',
-                       'view employees by manager',' view employees by department','delete department',
-                       'delete a role', 'delete an employee', 'view total department budget', 'exit'],
+                       'view employees by manager','view employees by department','delete department',
+                       'delete role', 'delete employee', 'view total department budget', 'exit'],
             },
           ])
     .then((response) => { 
@@ -355,15 +427,45 @@ const showMenu = function(){
                 showEmployeeManager(showMenu); 
 
               } else if (response.menu === "view employees by department") {
-                showEmployeeByDepartment(); 
-              } else if (response.menu === "delete a department") {
-                deleteDepartment(); 
-              } else if (response.menu === "delete a role") {
-                deleteRole(); 
-              } else if (response.menu === "delete an employee") {
-                deleteEmployee(); 
+                showEmployeeByDepartment(showMenu); 
+              } else if (response.menu === "delete department") {
+                         
+                  dept.getLisOfDepartments().then((departments) => {
+                         
+                  deleteDepartment(departments, showMenu); 
+                }
+                
+                ).catch((err) =>
+                {
+                  console.error(err);
+                });
+               
+              } else if (response.menu === "delete role") {
+
+                role.getListOfRoles().then((roles) => {
+                         
+                  deleteRole(roles, showMenu); 
+                }
+                
+                ).catch((err) =>
+                {
+                  console.error(err);
+                });
+
+              } else if (response.menu === "delete employee") {
+                emp.getLisOfEmployees().then((employees) => {
+                         
+                  deleteEmployee(employees, showMenu); 
+                }
+                
+                ).catch((err) =>
+                {
+                  console.error(err);
+                });
               } else if (response.menu === "view total department budget") {
-                showTotalDeptBudget(); 
+
+
+                showTotalDeptBudget(showMenu); 
             } else {
                process.exit(0);
             }

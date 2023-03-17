@@ -31,6 +31,48 @@ class Role {
           showMenu();
         });
       }
+
+
+
+    getListOfRoles() {
+
+        return new Promise((resolve, reject) => {
+          const roles = new Map();
+      
+          this.pool.execute("SELECT id, title from role", function(err, results, fields){
+            if (err) {
+              reject(err);
+              return;
+            }
+      
+            for (const result of results) {
+              roles.set(result.title, result.id);
+            }
+      
+            resolve(roles);
+          });
+        });
+
+    }
+
+
+
+    deleteRole(value, showMenu){
+      this.pool.query( `DELETE FROM role WHERE id = ?`, value,  function(err, results, fields) {
+
+        if(err){
+          console.error(err);
+          return;
+        }
+        console.log("Role has been deleted!");
+        console.log("");
+         showMenu(); 
+        }); 
+      
+
+
+    }
+
 }
 
 module.exports = Role;

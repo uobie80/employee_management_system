@@ -6,13 +6,14 @@ class Employee {
     }
   
 
-    getAllEmployees(showMenu){ this.pool.query( `SELECT employee.id, 
-                                                        employee.firstname,
-                                                        employee.lastname,
-                                                        role.title
-                                                     FROM employee,
-                                                           role
-                                                    WHERE employee.role_id = role.id`, function(err, results, fields) {
+    getAllEmployees(showMenu){ this.pool.query( `SELECT nonmanager.id, 
+                                                        nonmanager.firstname,
+                                                        nonmanager.lastname,
+                                                        role.title,
+                                                        CONCAT(employee.firstname, ' ', employee.lastname) as Manager
+                                                    FROM (SELECT id, firstname, lastname, manager_id, role_id FROM employee) AS nonmanager
+                                                    LEFT JOIN role ON nonmanager.role_id = role.id
+                                                    LEFT JOIN employee ON employee.id = nonmanager.manager_id` , function(err, results, fields) {
       if(err){
         console.error(err);
         return;
@@ -136,6 +137,42 @@ getLisOfEmployees() {
         console.log("");
         showMenu();
     });
+
+  }
+
+
+  showEmployeesByDepartment(showMenu){
+
+    this.pool.execute(`SELECT department.name as department, employee.firstname, employee.lastname 
+                        FROM employee,
+                               role,
+                               department
+                          WHERE employee.role_id = role.id
+                            AND  role.department_id = department.id`, function(err, results, fields){
+
+      if(err){
+        console.error(err);
+      }
+        console.log("");
+        console.table(results);
+        console.log("");
+        showMenu();
+       
+    });
+  }
+
+
+  deleteEmployee(value, showMenu){
+    this.pool.query( `DELETE FROM employee WHERE id = ?`, value,  function(err, results, fields) {
+
+      if(err){
+        console.error(err);
+        return;
+      }
+      console.log("Employee has been deleted!");
+      console.log("");
+       showMenu(); 
+      }); 
 
   }
 
